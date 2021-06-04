@@ -1,2 +1,2 @@
-# el_debate
-Projekt za Programiranje Web Aplikacija
+# El Debate
+Projekt za kolegij Programiranje Web Aplikacija
