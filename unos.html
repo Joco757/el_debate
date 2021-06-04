@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="icon" href="https://assets.debate.com.mx/__export/1513187264000/sites/debate/arte/el-debate/apps/favicon.png_2040392579.png">
+    <title>El Debate</title>
+</head>
+<body>
+    <header>
+        <img src="https://assets.debate.com.mx/__export/1508771766000/sites/debate/arte/el-debate/logo-blanco.svg">
+        <nav>
+            <ul>
+                <li><a href="index.php">HOME</a></li>
+                <li><a href="kategorija.php?id=politika">POLITIKA</a></li>
+                <li><a href="kategorija.php?id=sport">SPORT</a></li>
+                <li><a href="unos.html" class="active">UNOS</a></li>
+                <li><a href="administracija.html">ADMINISTRACIJA</a></li>
+                <li><a href="registracija.html">REGISTRACIJA</a></li>
+            </ul>
+        </nav>
+    </header>
+    <form method="POST" action="skripta.php" enctype="multipart/form-data" autocomplete="off">
+        <label for="naslov">Naslov vijesti:</label><br>
+        <input type="text" name="naslov" id="naslov" class="input">
+        <span id="poruka_naslov"></span>
+
+        <label for="kratkisadrzaj">Kratki sadržaj vijesti (do 50 znakova):</label><br>
+        <textarea name="kratkisadrzaj" id="kratkisadrzaj" rows="10"></textarea><br>
+        <span id="poruka_kratkisadrzaj"></span>
+
+        <label for="sadrzaj">Sadržaj vijesti:</label><br>
+        <textarea name="sadrzaj" id="sadrzaj" rows="10"></textarea><br>
+        <span id="poruka_sadrzaj"></span>
+
+        <label for="slika">Slika:</label>
+        <input type="file" name="slika" id="slika" accept="image/jpeg,image/gif"><br><br>
+        <span id="poruka_slika"></span>
+
+        <label for="kategorija">Kategorija:</label><br>
+        <select name="kategorija" id="kategorija">
+            <option></option>
+            <option value="politika">Politika</option>
+            <option value="sport">Sport</option>
+        </select><br>
+        <span id="poruka_kategorija"></span>
+
+        <label for="arhiva">Spremiti u arhivu  </label>
+        <input type="checkbox" name="arhiva"><br><br>
+        <button type="reset" value="Poništi">Poništi</button>
+        <button type="submit" value="Prihvati" id="submit">Prihvati</button>
+    </form>
+    <script type="text/javascript">
+        document.getElementById('submit').onclick = function(event){
+            var slanjeForme = true;
+            
+            var polje_naslov = document.getElementById("naslov");
+            var naslov = document.getElementById("naslov").value;
+            if (naslov.length < 5 || naslov.length > 30) {
+                slanjeForme = false;
+                polje_naslov.style.border="1px solid red";
+                document.getElementById("poruka_naslov").innerHTML="Naslov mora imati 5 do 30 znakova!<br><br>";
+            }
+
+            var polje_kratkisadrzaj = document.getElementById("kratkisadrzaj");
+            var sazetak = document.getElementById("kratkisadrzaj").value;
+            if (sazetak.length < 10 || sazetak.length > 100) {
+                slanjeForme = false;
+                polje_kratkisadrzaj.style.border="1px solid red";
+                document.getElementById("poruka_kratkisadrzaj").innerHTML="Kratki sadržaj mora imati 10 do 100 znakova!<br><br>";
+            }
+            
+            var polje_sadrzaj = document.getElementById("sadrzaj");
+            var sadrzaj = document.getElementById("sadrzaj").value;
+            if (sadrzaj.length == 0) {
+                slanjeForme = false;
+                polje_sadrzaj.style.border="1px solid red";
+                document.getElementById("poruka_sadrzaj").innerHTML="Sadržaj mora biti unesen!<br><br>";
+            }
+
+            var polje_slika = document.getElementById("slika");
+            var slika = document.getElementById("slika").value;
+            if (slika.length == 0) {
+                slanjeForme = false;
+                polje_slika.style.border="1px solid red";
+                document.getElementById("poruka_slika").innerHTML="Slika mora biti unesena!<br><br>";
+            } 
+
+            var polje_kategorija = document.getElementById("kategorija");
+            if(document.getElementById("kategorija").selectedIndex == 0) {
+                slanjeForme = false;
+                polje_kategorija.style.border="1px solid red";
+                document.getElementById("poruka_kategorija").innerHTML="Kategorija mora biti odabrana!<br><br>";
+            }
+
+            if (slanjeForme != true) {
+                event.preventDefault();
+            }
+        };
+    </script>
+    <section></section>
+    <footer>
+        <div class="gore"></div>
+        <div class="dolje">
+            © Copyright EL DEBATE. Todos los derechos reservados.
+        </div>
+    </footer>
+</body>
+</html>
