@@ -34,16 +34,15 @@ define('UPLPATH', 'slike/');
             $query = "SELECT * FROM vijest WHERE arhiva=0 AND kategorija='politika' LIMIT 4";
             $result = mysqli_query($dbc, $query);
             while($row = mysqli_fetch_array($result)) {
-                echo '<article>';
+                echo '<a href="clanak.php?id='.$row['id'].'"><article>';
                 echo '<img class="img" src="' . UPLPATH . $row['slika'] . '">';
                 echo '<h6 class="h6gore">';
                 echo $row['kategorija'];
                 echo '</h6>';
                 echo '<h3>';
-                echo '<a href="clanak.php?id='.$row['id'].'">';
                 echo $row['naslov'];
-                echo '</a></h3>';
-                echo '</article>';
+                echo '</h3>';
+                echo '</article></a>';
             }
         ?>
     </section>
@@ -55,7 +54,7 @@ define('UPLPATH', 'slike/');
             $query = "SELECT * FROM vijest WHERE arhiva=0 AND kategorija='sport' LIMIT 4";
             $result = mysqli_query($dbc, $query);
             while($row = mysqli_fetch_array($result)) {
-                echo '<article>';
+                echo '<a href="clanak.php?id='.$row['id'].'"><article>';
                 echo '<img class="img" src="' . UPLPATH . $row['slika'] . '">';
                 echo '<h6 class="h6gore">';
                 echo $row['kategorija'];
@@ -63,8 +62,8 @@ define('UPLPATH', 'slike/');
                 echo '<h3>';
                 echo '<a href="clanak.php?id='.$row['id'].'">';
                 echo $row['naslov'];
-                echo '</a></h3>';
-                echo '</article>';
+                echo '</h3>';
+                echo '</article></a>';
             }
         ?>
     </section>

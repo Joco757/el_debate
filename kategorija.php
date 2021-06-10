@@ -35,7 +35,7 @@ $kategorija=$_GET['id'];
             $query = "SELECT * FROM vijest WHERE arhiva=0 AND kategorija='$kategorija'";
             $result = mysqli_query($dbc, $query);
             while($row = mysqli_fetch_array($result)) {
-                echo '<article>';
+                echo '<a href="clanak.php?id='.$row['id'].'"><article>';
                 echo '<img class="img" src="' . UPLPATH . $row['slika'] . '">';
                 echo '<h6 class="h6gore">';
                 echo $row['kategorija'];
@@ -43,8 +43,8 @@ $kategorija=$_GET['id'];
                 echo '<h3>';
                 echo '<a href="clanak.php?id='.$row['id'].'">';
                 echo $row['naslov'];
-                echo '</a></h3>';
-                echo '</article>';
+                echo '</h3>';
+                echo '</article></a>';
             }
         ?>
     </section>

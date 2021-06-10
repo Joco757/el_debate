@@ -97,6 +97,10 @@ section:after {
     padding-left: 0.7%;
 }
 
+.sec {
+    padding-top: 30px;
+}
+
 .img {
     width: 16vw;
     height: 9vw;

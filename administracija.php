@@ -50,35 +50,11 @@ if (isset($_POST['prijava'])) {
         } else {
             $_SESSION['$admin'] = false;
         }
-        $_SESSION['$username'] = $imeKorisnika;
-        $_SESSION['$level'] = $levelKorisnika;
     } else {
         $_SESSION['$uspjesnaPrijava'] = false;
     }
-}
-   
-if(isset($_POST['delete'])) {
-    $id=$_POST['id'];
-    $query = "DELETE FROM vijest WHERE id=$id ";
-    $result = mysqli_query($dbc, $query);
-}
-if(isset($_POST['update'])){
-    $slika = $_FILES['slika']['name'];
-    $naslov=$_POST['naslov'];
-    $sazetak=$_POST['kratkisadrzaj'];
-    $sadrzaj=$_POST['sadrzaj'];
-    $kategorija=$_POST['kategorija'];
-    if(isset($_POST['arhiva'])){
-     $arhiva=1;
-    }else{
-     $arhiva=0;
-    }
-    $dir = 'slike/'.$slika;
-    move_uploaded_file($_FILES["slika"]["tmp_name"], $dir);
-    $id=$_POST['id'];
-    $query = "UPDATE vijest SET naslov='$naslov', sazetak='$sazetak', sadrzaj='$sadrzaj',
-    slika='$slika', kategorija='$kategorija', arhiva='$arhiva' WHERE id=$id ";
-    $result = mysqli_query($dbc, $query);
+    $_SESSION['$username'] = $imeKorisnika;
+    $_SESSION['$level'] = $levelKorisnika;
 }
 
 if (($_SESSION['$uspjesnaPrijava'] == true && $_SESSION['$admin'] == true) || (isset($_SESSION['$username'])) && $_SESSION['$level'] == 1) {
@@ -122,6 +98,29 @@ if (($_SESSION['$uspjesnaPrijava'] == true && $_SESSION['$admin'] == true) || (i
         </form>
         <hr>';
     } 
+    if(isset($_POST['delete'])) {
+        $id=$_POST['id'];
+        $query = "DELETE FROM vijest WHERE id=$id ";
+        $result = mysqli_query($dbc, $query);
+    }
+    if(isset($_POST['update'])){
+        $slika = $_FILES['slika']['name'];
+        $naslov=$_POST['naslov'];
+        $sazetak=$_POST['kratkisadrzaj'];
+        $sadrzaj=$_POST['sadrzaj'];
+        $kategorija=$_POST['kategorija'];
+        if(isset($_POST['arhiva'])){
+         $arhiva=1;
+        }else{
+         $arhiva=0;
+        }
+        $dir = 'slike/'.$slika;
+        move_uploaded_file($_FILES["slika"]["tmp_name"], $dir);
+        $id=$_POST['id'];
+        $query = "UPDATE vijest SET naslov='$naslov', sazetak='$sazetak', sadrzaj='$sadrzaj',
+        slika='$slika', kategorija='$kategorija', arhiva='$arhiva' WHERE id=$id ";
+        $result = mysqli_query($dbc, $query);
+    }
  } else if ($_SESSION['$uspjesnaPrijava'] == true && $_SESSION['$admin'] == false) {
    echo "<section class='clanak'>
     <h1 style='padding-top:50px;'>Bok " . $imeKorisnika . "! Uspješno ste prijavljeni, ali niste administrator.</h1>
@@ -137,6 +136,7 @@ if (($_SESSION['$uspjesnaPrijava'] == true && $_SESSION['$admin'] == true) || (i
     <br>
     <input type="text" id="korisnicko_ime" name="korisnicko_ime" class="input2">
     <br>
+    <span>Neispravno korinsničko ime ili lozinka. Pokušajte ponovo ili se <a href="registracija.html">registrirajte.</a></span><br>
     <span id="porukaKorisnicko_ime"></span><br>
     <label for="lozinka">Lozinka:</label>
     <br>
